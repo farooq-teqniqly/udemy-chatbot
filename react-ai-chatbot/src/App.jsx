@@ -2,16 +2,30 @@ import {useState} from "react";
 import styles from "./App.module.css";
 import {Chat} from "./components/Chat/Chat";
 import {Controls} from "./components/Controls/Controls";
+import {Assistant} from "./assistants/googleAI";
+import {Message} from "./assistants/messages";
 
 function App() {
+    const assistant = new Assistant();
     const [messages, setMessages] = useState([]);
 
-    function handleContentSend(content) {
-        setMessages((previousMessages) => [...previousMessages, {role: "user", content}]);
+    function addMessage(message) {
+        setMessages((previousMessages) => [...previousMessages, message]);
     }
 
-    return (
-        <div className={styles.App}>
+    async function handleContentSend(content) {
+        addMessage(Message.user(content));
+
+        try {
+            const response = await assistant.sendMessage(content);
+            addMessage(Message.assistant(response));
+        } catch (error) {
+            addMessage(Message.system(content));
+            console.log(error);
+        }
+    }
+
+    return (<div className={styles.App}>
             <header className={styles.Header}>
                 <img src="/chat-bot.png" alt="AI Chat Bot" className={styles.Logo}/>
                 <h2 className={styles.Title}>AI Chatbot</h2>
@@ -20,8 +34,7 @@ function App() {
                 <Chat messages={messages}></Chat>
             </div>
             <Controls onSend={handleContentSend}></Controls>
-        </div>
-    )
+        </div>)
 }
 
 export default App

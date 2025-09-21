@@ -4,7 +4,11 @@ import {Chat} from "./components/Chat/Chat";
 import {Controls} from "./components/Controls/Controls";
 
 function App() {
-    const [messages, _] = useState(MESSAGES);
+    const [messages, setMessages] = useState([]);
+
+    function handleContentSend(content) {
+        setMessages((previousMessages) => [...previousMessages, {role: "user", content}]);
+    }
 
     return (
         <div className={styles.App}>
@@ -15,44 +19,9 @@ function App() {
             <div className={styles.ChatContainer}>
                 <Chat messages={messages}></Chat>
             </div>
-            <Controls></Controls>
+            <Controls onSend={handleContentSend}></Controls>
         </div>
     )
 }
-
-const MESSAGES = [
-    {
-        role: "user",
-        content: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
-    },
-    {
-        role: "assistant",
-        content: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
-    },
-    {
-        role: "user",
-        content: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
-    },
-    {
-        role: "assistant",
-        content: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
-    },
-    {
-        role: "user",
-        content: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
-    },
-    {
-        role: "assistant",
-        content: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
-    },
-    {
-        role: "user",
-        content: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
-    },
-    {
-        role: "assistant",
-        content: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
-    }
-]
 
 export default App

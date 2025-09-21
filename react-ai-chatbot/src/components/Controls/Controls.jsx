@@ -1,12 +1,38 @@
 import styles from "./Controls.module.css"
+import {useState} from "react";
 
-export function Controls() {
+export function Controls({onSend}) {
+    const [content, setContent] = useState("");
+
+    function handleContentChange(event) {
+        setContent(event.target.value);
+    }
+
+    function handleContentSend() {
+        if (content.length < 1) {
+            return;
+        }
+
+        onSend(content);
+        setContent("");
+    }
+
+    function handleEnterPress(event) {
+        if (event.key !== "Enter" || event.shiftKey) {
+            return;
+        }
+
+        event.preventDefault();
+        handleContentSend();
+    }
+
     return (
         <div className={styles.Controls}>
             <div className={styles.TextAreaContainer}>
-                <textarea placeholder="Message AI Chatbot" className={styles.TextArea}></textarea>
+                <textarea placeholder="Message AI Chatbot" className={styles.TextArea} value={content}
+                          onChange={handleContentChange} onKeyDown={handleEnterPress}></textarea>
             </div>
-            <button className={styles.Button}><SendIcon></SendIcon></button>
+            <button className={styles.Button} onClick={handleContentSend}><SendIcon></SendIcon></button>
         </div>
     )
 }

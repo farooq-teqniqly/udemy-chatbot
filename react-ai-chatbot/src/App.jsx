@@ -8,6 +8,7 @@ import {Message} from "./assistants/messages";
 function App() {
     const assistant = new Assistant();
     const [messages, setMessages] = useState([]);
+    const [useWebSearch, setUseWebSearch] = useState(false);
 
     function addMessage(message) {
         setMessages((previousMessages) => [...previousMessages, message]);
@@ -18,12 +19,16 @@ function App() {
         addMessage(message);
 
         try {
-            const response = await assistant.sendMessage(message);
+            const response = await assistant.sendMessage(message, useWebSearch);
             addMessage(Message.assistant(response));
         } catch (error) {
             addMessage(Message.system(content));
             console.log(error);
         }
+    }
+
+    function handleUseWebSearchChange() {
+        setUseWebSearch((previousValue) => !previousValue);
     }
 
     return (<div className={styles.App}>
@@ -34,7 +39,10 @@ function App() {
         <div className={styles.ChatContainer}>
             <Chat messages={messages}></Chat>
         </div>
-        <Controls onSend={handleContentSend}></Controls>
+        <div className={styles.ControlsContainer}>
+            <label className={styles.CheckboxLabel}><input type="checkbox" onChange={handleUseWebSearchChange} /> Use web search tool</label>
+            <Controls onSend={handleContentSend}></Controls>
+        </div>
     </div>)
 }
 

@@ -14,7 +14,7 @@ export class Assistant {
         this.#model = model;
     }
 
-    async sendMessage({content, role}) {
+    async sendMessage({content, role}, useWebSearch = false) {
         const body = {
             model: this.#model,
             input: [
@@ -25,10 +25,8 @@ export class Assistant {
             ]
         };
 
-        if (content.toLowerCase().endsWith(USE_WEB_SEARCH_TOOL_DIRECTIVE)) {
+        if (useWebSearch) {
             body["tools"] = [{type: "web_search"}];
-
-            content.replace(USE_WEB_SEARCH_TOOL_DIRECTIVE, "");
         }
 
         const response = await openAI.responses.create(body);

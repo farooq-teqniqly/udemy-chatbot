@@ -27,3 +27,14 @@
     border-radius: 16px;
     overflow-y: auto;
 }
+
+.ControlsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.CheckboxLabel {
+    font-size: 14px;
+}

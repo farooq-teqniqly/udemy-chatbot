@@ -33,8 +33,10 @@
     flex-direction: row;
     align-items: center;
     gap: 16px;
+    width: 100%;
 }
 
 .CheckboxLabel {
     font-size: 14px;
+    white-space: nowrap;
 }

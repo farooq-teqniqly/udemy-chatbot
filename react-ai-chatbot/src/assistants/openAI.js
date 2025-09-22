@@ -5,6 +5,8 @@ const openAI = new OpenAI({
     dangerouslyAllowBrowser: true
 });
 
+const USE_WEB_SEARCH_TOOL_DIRECTIVE = "[use-tool-web-search]";
+
 export class Assistant {
     #model;
 
@@ -13,7 +15,7 @@ export class Assistant {
     }
 
     async sendMessage({content, role}) {
-        const response = await openAI.responses.create({
+        const body = {
             model: this.#model,
             input: [
                 {
@@ -21,7 +23,15 @@ export class Assistant {
                     content
                 }
             ]
-        });
+        };
+
+        if (content.toLowerCase().endsWith(USE_WEB_SEARCH_TOOL_DIRECTIVE)) {
+            body["tools"] = [{type: "web_search"}];
+
+            content.replace(USE_WEB_SEARCH_TOOL_DIRECTIVE, "");
+        }
+
+        const response = await openAI.responses.create(body);
 
         return response.output_text;
     }

@@ -43,7 +43,8 @@ export function Controls({disabled = false, onSend}) {
                                   value={content}
                                   onChange={handleContentChange} onKeyDown={handleEnterPress}></TextareaAutosize>
             </div>
-            <button disabled={disabled} className={styles.Button} onClick={handleContentSend}><SendIcon></SendIcon>
+            <button type="button" disabled={disabled} className={styles.Button} onClick={handleContentSend}>
+                <SendIcon></SendIcon>
             </button>
         </div>
     )

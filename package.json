@@ -1,5 +1,11 @@
 {
-  "dependencies": {
-    "react-markdown": "^10.1.0"
+  "name": "udemy-chatbot",
+  "private": true,
+  "workspaces": [
+    "react-ai-chatbot"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=react-ai-chatbot",
+    "build": "npm run build --workspace=react-ai-chatbot"
   }
 }

@@ -1,5 +1,6 @@
 import {useState, useMemo} from "react";
 import styles from "./App.module.css";
+import {useSettingsStore} from "./stores/settingsStore";
 import {Chat} from "./components/Chat/Chat";
 import {Controls} from "./components/Controls/Controls";
 import {SettingsButton} from "./components/SettingsButton/SettingsButton";
@@ -11,10 +12,11 @@ import {Message} from "./assistants/messages";
 function App() {
     const assistant = useMemo(() => new Assistant(), []);
     const [messages, setMessages] = useState([]);
-    const [useWebSearch, setUseWebSearch] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [disabled, setDisabled] = useState(false);
+
+    const useWebSearch = useSettingsStore((state) => state.useWebSearch);
 
     function addMessage(message) {
         setMessages((previousMessages) => [...previousMessages, message]);
@@ -35,10 +37,6 @@ function App() {
             setIsLoading(false);
             setDisabled(false);
         }
-    }
-
-    function handleUseWebSearchChange() {
-        setUseWebSearch((previousValue) => !previousValue);
     }
 
     function handleSettingsOpen() {
@@ -65,8 +63,6 @@ function App() {
         <SettingsModal
             isOpen={isSettingsOpen}
             onClose={handleSettingsClose}
-            useWebSearch={useWebSearch}
-            onWebSearchChange={handleUseWebSearchChange}
         />
     </div>);
 }

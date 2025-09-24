@@ -1,5 +1,5 @@
 .Chat {
-   display: flex;
+    display: flex;
     flex-direction: column;
     gap: 8px;
     height: 100%;
@@ -17,4 +17,15 @@
         align-self: flex-end;
         background: #f3f3f3;
     }
+}
+
+.Group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Group:nth-last-of-type(2) {
+    /* 8px - gap between groups */
+    min-height: calc(100% - 8px);
 }

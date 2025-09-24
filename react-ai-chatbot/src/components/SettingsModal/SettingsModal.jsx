@@ -8,14 +8,8 @@ export function SettingsModal({
 }) {
   if (!isOpen) return null;
 
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
-    <div className={styles.Backdrop} onClick={handleBackdropClick}>
+    <div className={styles.Backdrop}>
       <div className={styles.Modal}>
         <div className={styles.Header}>
           <h3 className={styles.Title}>Settings</h3>

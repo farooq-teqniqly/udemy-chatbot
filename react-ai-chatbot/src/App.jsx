@@ -4,6 +4,7 @@ import {Chat} from "./components/Chat/Chat";
 import {Controls} from "./components/Controls/Controls";
 import {SettingsButton} from "./components/SettingsButton/SettingsButton";
 import {SettingsModal} from "./components/SettingsModal/SettingsModal";
+import {Loader} from "./components/Loader/Loader";
 import {Assistant} from "./assistants/openAI";
 import {Message} from "./assistants/messages";
 
@@ -12,6 +13,7 @@ function App() {
     const [messages, setMessages] = useState([]);
     const [useWebSearch, setUseWebSearch] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     function addMessage(message) {
         setMessages((previousMessages) => [...previousMessages, message]);
@@ -20,13 +22,15 @@ function App() {
     async function handleContentSend(content) {
         const message = Message.user(content);
         addMessage(message);
-
+        setIsLoading(true);
         try {
             const response = await assistant.sendMessage(message, useWebSearch);
             addMessage(Message.assistant(response));
         } catch (error) {
             addMessage(Message.system(content));
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -42,8 +46,8 @@ function App() {
         setIsSettingsOpen(false);
     }
 
-    return (
-        <div className={styles.App}>
+    return (<div className={styles.App}>
+            {isLoading && <Loader></Loader>}
             <header className={styles.Header}>
                 <img src="/chat-bot.png" alt="AI Chat Bot" className={styles.Logo}/>
                 <h2 className={styles.Title}>AI Chatbot</h2>
@@ -61,8 +65,7 @@ function App() {
                 useWebSearch={useWebSearch}
                 onWebSearchChange={handleUseWebSearchChange}
             />
-        </div>
-    );
+        </div>);
 }
 
 export default App;

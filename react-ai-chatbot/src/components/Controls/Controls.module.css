@@ -21,6 +21,11 @@
     background: #ffffff;
 }
 
+.TextArea:disabled,
+.Button:disabled {
+    opacity: 0.35;
+}
+
 .Button {
     display: flex;
     justify-content: center;
@@ -33,6 +38,9 @@
     background: #0d0d0d;
 }
 
+.Button:hover:not(:disabled) {
+    background: #333333;
+}
 .Button svg {
     fill: #f3f3f3;
 }

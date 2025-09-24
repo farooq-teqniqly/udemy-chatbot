@@ -1,8 +1,9 @@
 import styles from "./SettingsButton.module.css";
 
-export function SettingsButton({onClick}) {
+export function SettingsButton({disabled = false, onClick}) {
     return (
-        <button type="button" aria-label="Open settings" className={styles.Button} onClick={onClick}>
+        <button disabled={disabled} type="button" aria-label="Open settings" className={styles.Button}
+                onClick={onClick}>
             <GearIcon/>
         </button>
     );

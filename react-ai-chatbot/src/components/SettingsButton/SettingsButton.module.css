@@ -1,20 +1,24 @@
 .Button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 50%;
-  outline: none;
-  background: #0d0d0d;
-  cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background: #0d0d0d;
 }
 
-.Button:hover {
-  background: #333333;
+.Button:disabled {
+    opacity: 0.35;
 }
+
+.Button:hover:not(:disabled) {
+    background: #333333;
+}
+
 
 .Button svg {
-  fill: #f3f3f3;
+    fill: #f3f3f3;
 }

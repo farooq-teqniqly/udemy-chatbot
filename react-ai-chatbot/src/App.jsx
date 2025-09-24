@@ -14,6 +14,7 @@ function App() {
     const [useWebSearch, setUseWebSearch] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [disabled, setDisabled] = useState(false);
 
     function addMessage(message) {
         setMessages((previousMessages) => [...previousMessages, message]);
@@ -23,6 +24,7 @@ function App() {
         const message = Message.user(content);
         addMessage(message);
         setIsLoading(true);
+        setDisabled(true);
         try {
             const response = await assistant.sendMessage(message, useWebSearch);
             addMessage(Message.assistant(response));
@@ -31,6 +33,7 @@ function App() {
             console.error(error);
         } finally {
             setIsLoading(false);
+            setDisabled(false);
         }
     }
 
@@ -47,25 +50,25 @@ function App() {
     }
 
     return (<div className={styles.App}>
-            {isLoading && <Loader></Loader>}
-            <header className={styles.Header}>
-                <img src="/chat-bot.png" alt="AI Chat Bot" className={styles.Logo}/>
-                <h2 className={styles.Title}>AI Chatbot</h2>
-            </header>
-            <div className={styles.ChatContainer}>
-                <Chat messages={messages}></Chat>
-            </div>
-            <div className={styles.ControlsContainer}>
-                <SettingsButton onClick={handleSettingsOpen}/>
-                <Controls onSend={handleContentSend}></Controls>
-            </div>
-            <SettingsModal
-                isOpen={isSettingsOpen}
-                onClose={handleSettingsClose}
-                useWebSearch={useWebSearch}
-                onWebSearchChange={handleUseWebSearchChange}
-            />
-        </div>);
+        {isLoading && <Loader></Loader>}
+        <header className={styles.Header}>
+            <img src="/chat-bot.png" alt="AI Chat Bot" className={styles.Logo}/>
+            <h2 className={styles.Title}>AI Chatbot</h2>
+        </header>
+        <div className={styles.ChatContainer}>
+            <Chat messages={messages}></Chat>
+        </div>
+        <div className={styles.ControlsContainer}>
+            <SettingsButton disabled={disabled} onClick={handleSettingsOpen}/>
+            <Controls disabled={disabled} onSend={handleContentSend}></Controls>
+        </div>
+        <SettingsModal
+            isOpen={isSettingsOpen}
+            onClose={handleSettingsClose}
+            useWebSearch={useWebSearch}
+            onWebSearchChange={handleUseWebSearchChange}
+        />
+    </div>);
 }
 
 export default App;

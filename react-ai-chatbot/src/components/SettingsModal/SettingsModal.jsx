@@ -30,7 +30,7 @@ export function SettingsModal({
                     </label>
                 </div>
                 <div className={styles.Footer}>
-                    <button className={styles.CloseButton} onClick={onClose}>
+                    <button type="button" className={styles.CloseButton} onClick={onClose}>
                         Close
                     </button>
                 </div>

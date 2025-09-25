@@ -19,7 +19,7 @@ A modern, responsive AI chatbot built with React and Vite that supports multiple
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
+- Node.js (version 22 or higher)
 - npm or pnpm
 - API keys for OpenAI and/or Google AI
 

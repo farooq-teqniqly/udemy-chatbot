@@ -24,6 +24,11 @@ function App() {
     const [theme] = useTheme();
 
     useEffect(() => {
+
+        if (typeof document === "undefined") {
+            return;
+        }
+        
         const root = document.documentElement;
         const previousColorScheme = root.style.colorScheme;
         let currentColorScheme = THEMES.AUTO;

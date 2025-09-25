@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import {
     useWebSearchTool,
     useTheme,
+    THEMES
 } from "./stores/settingsStore";
 import {Chat} from "./components/Chat/Chat";
 import {Controls} from "./components/Controls/Controls";
@@ -25,14 +26,13 @@ function App() {
     useEffect(() => {
         const root = document.documentElement;
         const previousColorScheme = root.style.colorScheme;
+        let currentColorScheme = THEMES.AUTO;
 
-        if (theme === "light") {
-            root.style.colorScheme = "light";
-        } else if (theme === "dark") {
-            root.style.colorScheme = "dark";
-        } else {
-            root.style.colorScheme = "light dark";
+        if (Object.values(THEMES).includes(theme)) {
+            currentColorScheme = theme;
         }
+
+        root.style.colorScheme = currentColorScheme;
 
         return () => {
             root.style.colorScheme = previousColorScheme;

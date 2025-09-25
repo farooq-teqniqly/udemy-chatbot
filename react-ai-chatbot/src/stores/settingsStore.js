@@ -6,11 +6,16 @@ export const SETTING_KEYS = {
   THEME: "theme",
 };
 
+export const THEMES = {
+    AUTO: "light dark",
+    LIGHT: "light",
+    DARK: "dark",
+}
 
 const getDefaultSettings = () => {
   return {
     [SETTING_KEYS.USE_WEB_SEARCH]: false,
-    [SETTING_KEYS.THEME]: "auto",
+    [SETTING_KEYS.THEME]: THEMES.AUTO,
   };
 };
 

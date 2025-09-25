@@ -108,6 +108,8 @@ const selectUseWebSearch = (state) => state[SETTING_KEYS.USE_WEB_SEARCH];
 
 ```bash
 npm install zustand
+# using middleware
+# import from "zustand/middleware"
 ```
 
 ## Implementation Guide
@@ -565,12 +567,16 @@ setMaxTokens: (value) => {
 ### Middleware for Logging
 
 ```javascript
-import { subscribeWithSelector } from "zustand/middleware";
+import { persist, subscribeWithSelector } from "zustand/middleware";
 
 const useSettingsStore = create(
   subscribeWithSelector(
-    persist()
-    // ... store definition
+    persist(
+        (set, get) => ({
+                // ... store definition
+        }),
+        { name: "settings-store" }
+    )
   )
 );
 

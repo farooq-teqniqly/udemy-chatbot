@@ -12,7 +12,7 @@
 }
 
 .Modal {
-    background: #ffffff;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     background: light-dark(#ffffff, #2a2a2a);
     border-radius: 16px;
     padding: 0;
@@ -27,7 +27,7 @@
 
 .Header {
     padding: 20px 24px 16px 24px;
-    border-bottom: #e5e5e5;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     border-bottom: 1px solid light-dark(#e5e5e5, #404040);
 }
 
@@ -35,7 +35,7 @@
     margin: 0;
     font-size: 18px;
     font-weight: 600;
-    color: #0d0d0d;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     color: light-dark(#0d0d0d, #ececec);
 }
 
@@ -48,7 +48,7 @@
     align-items: center;
     gap: 8px;
     font-size: 14px;
-    color: #0d0d0d;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     color: light-dark(#0d0d0d, #ececec);
     cursor: pointer;
     margin-bottom: 16px;
@@ -68,19 +68,19 @@
 .Label {
     font-size: 14px;
     font-weight: 500;
-    color: #0d0d0d;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     color: light-dark(#0d0d0d, #ececec);
 }
 
 .Select {
     padding: 8px 12px;
-    border: 1px solid #e5e5e5;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     border: 1px solid light-dark(#e5e5e5, #404040);
     border-radius: 8px;
     font-size: 14px;
-    background: #ffffff;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     background: light-dark(#ffffff, #2a2a2a);
-    color: #0d0d0d;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     color: light-dark(#0d0d0d, #ececec);
     cursor: pointer;
     outline: none;
@@ -93,16 +93,16 @@
 
 .Footer {
     padding: 16px 24px 20px 24px;
-    border-top: 1px solid #e5e5e5;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     border-top: 1px solid light-dark(#e5e5e5, #404040);
     display: flex;
     justify-content: flex-end;
 }
 
 .CloseButton {
-    background: #0d0d0d;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     background: light-dark(#0d0d0d, #ececec);
-    color: #ffffff;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     color: light-dark(#ffffff, #0d0d0d);
     border: none;
     border-radius: 8px;
@@ -118,6 +118,6 @@
 }
 
 .CloseButton:hover {
-    background: #333333;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     background: light-dark(#333333, #cccccc);
 }

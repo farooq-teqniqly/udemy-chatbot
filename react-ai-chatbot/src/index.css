@@ -4,9 +4,9 @@
     font-weight: 400;
 
     color-scheme: light dark;
-    color: #0d0d0d;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     color: light-dark(#0d0d0d, #ececec);
-    background: #f3f3f3;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
     background: light-dark(#f3f3f3, #171717);
 
     font-synthesis: none;

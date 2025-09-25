@@ -6,16 +6,25 @@ export function SettingsModal({isOpen, onClose}) {
     const [useWebSearch, setUseWebSearch] = useWebSearchTool();
     const [theme, setTheme] = useTheme();
     const themeSelectId = useId();
+    const titleId = useId();
 
     if (!isOpen) {
         return null;
+    }
+
+    const handleThemeChange = (theme) => {
+        if (theme !== "auto" && theme !== "dark" && theme !== "light") {
+            return;
+        }
+
+        setTheme(theme);
     }
 
     return (
         <div className={styles.Backdrop}>
             <div className={styles.Modal}>
                 <div className={styles.Header}>
-                    <h3 className={styles.Title}>Settings</h3>
+                    <h3 id={titleId} className={styles.Title}>Settings</h3>
                 </div>
                 <div className={styles.Content}>
                     <label className={styles.CheckboxLabel}>
@@ -33,7 +42,7 @@ export function SettingsModal({isOpen, onClose}) {
                         <select
                             id={themeSelectId}
                             value={theme}
-                            onChange={(e) => setTheme(e.target.value)}
+                            onChange={(e) => handleThemeChange(e.target.value)}
                             className={styles.Select}
                         >
                             <option value="auto">Auto (System)</option>

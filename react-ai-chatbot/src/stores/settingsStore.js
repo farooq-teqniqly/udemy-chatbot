@@ -6,6 +6,7 @@ export const SETTING_KEYS = {
   THEME: "theme",
 };
 
+
 const getDefaultSettings = () => {
   return {
     [SETTING_KEYS.USE_WEB_SEARCH]: false,

@@ -24,6 +24,7 @@ function App() {
 
     useEffect(() => {
         const root = document.documentElement;
+        const previousColorScheme = root.style.colorScheme;
 
         if (theme === "light") {
             root.style.colorScheme = "light";
@@ -32,6 +33,11 @@ function App() {
         } else {
             root.style.colorScheme = "light dark";
         }
+
+        return () => {
+            root.style.colorScheme = previousColorScheme;
+        };
+
     }, [theme]);
 
     function addMessage(message) {

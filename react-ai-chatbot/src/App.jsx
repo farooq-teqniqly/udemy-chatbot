@@ -1,6 +1,6 @@
 import {useState, useMemo} from "react";
 import styles from "./App.module.css";
-import {useSettingsStore} from "./stores/settingsStore";
+import {useSettingsStore, SETTING_KEYS} from "./stores/settingsStore";
 import {Chat} from "./components/Chat/Chat";
 import {Controls} from "./components/Controls/Controls";
 import {SettingsButton} from "./components/SettingsButton/SettingsButton";
@@ -16,7 +16,7 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [disabled, setDisabled] = useState(false);
 
-    const useWebSearch = useSettingsStore((state) => state.useWebSearch);
+    const useWebSearch = useSettingsStore((state) => state.getSetting(SETTING_KEYS.USE_WEB_SEARCH));
 
     function addMessage(message) {
         setMessages((previousMessages) => [...previousMessages, message]);

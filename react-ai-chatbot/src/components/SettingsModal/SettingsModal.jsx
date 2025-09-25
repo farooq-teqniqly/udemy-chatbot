@@ -1,12 +1,12 @@
 import styles from "./SettingsModal.module.css";
-import {useSettingsStore} from "../../stores/settingsStore";
+import {useWebSearchTool} from "../../stores/settingsStore";
 
 export function SettingsModal({
                                   isOpen,
                                   onClose
                               }) {
 
-    const {useWebSearch, setUseWebSearch} = useSettingsStore();
+    const [useWebSearch, setUseWebSearch] = useWebSearchTool();
 
     if (!isOpen) {
         return null;

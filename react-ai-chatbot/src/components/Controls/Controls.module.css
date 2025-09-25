@@ -10,7 +10,8 @@
     padding: 8px 16px;
     line-height: 0;
     border-radius: 16px;
-    background: #ffffff;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
+    background: light-dark(#ffffff, #212121);
 }
 
 .TextArea {
@@ -18,7 +19,8 @@
     border: none;
     outline: none;
     resize: none;
-    background: #ffffff;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
+    background: light-dark(#ffffff, #212121);
 }
 
 .TextArea:disabled,
@@ -35,12 +37,15 @@
     border: none;
     border-radius: 50%;
     outline: none;
-    background: #0d0d0d;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
+    background: light-dark(#0d0d0d, #ececec);
 }
 
 .Button:hover:not(:disabled) {
     background: #333333;
 }
+
 .Button svg {
-    fill: #f3f3f3;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback first, theme-aware override */
+    fill: light-dark(#f3f3f3, #171717);
 }

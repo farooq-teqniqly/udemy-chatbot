@@ -1,6 +1,10 @@
-import {useState, useMemo} from "react";
+import {useState, useMemo, useEffect} from "react";
 import styles from "./App.module.css";
-import {useSettingsStore, SETTING_KEYS} from "./stores/settingsStore";
+import {
+    useWebSearchTool,
+    useTheme,
+    THEMES
+} from "./stores/settingsStore";
 import {Chat} from "./components/Chat/Chat";
 import {Controls} from "./components/Controls/Controls";
 import {SettingsButton} from "./components/SettingsButton/SettingsButton";
@@ -16,7 +20,30 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [disabled, setDisabled] = useState(false);
 
-    const useWebSearch = useSettingsStore((state) => state.getSetting(SETTING_KEYS.USE_WEB_SEARCH));
+    const [useWebSearch] = useWebSearchTool();
+    const [theme] = useTheme();
+
+    useEffect(() => {
+
+        if (typeof document === "undefined") {
+            return;
+        }
+        
+        const root = document.documentElement;
+        const previousColorScheme = root.style.colorScheme;
+        let currentColorScheme = THEMES.AUTO;
+
+        if (Object.values(THEMES).includes(theme)) {
+            currentColorScheme = theme;
+        }
+
+        root.style.colorScheme = currentColorScheme;
+
+        return () => {
+            root.style.colorScheme = previousColorScheme;
+        };
+
+    }, [theme]);
 
     function addMessage(message) {
         setMessages((previousMessages) => [...previousMessages, message]);
@@ -47,24 +74,23 @@ function App() {
         setIsSettingsOpen(false);
     }
 
-    return (<div className={styles.App}>
-        {isLoading && <Loader></Loader>}
-        <header className={styles.Header}>
-            <img src="/chat-bot.png" alt="AI Chat Bot" className={styles.Logo}/>
-            <h2 className={styles.Title}>AI Chatbot</h2>
-        </header>
-        <div className={styles.ChatContainer}>
-            <Chat messages={messages}></Chat>
+    return (
+        <div className={styles.App}>
+            {isLoading && <Loader></Loader>}
+            <header className={styles.Header}>
+                <img src="/chat-bot.png" alt="AI Chat Bot" className={styles.Logo}/>
+                <h2 className={styles.Title}>AI Chatbot</h2>
+            </header>
+            <div className={styles.ChatContainer}>
+                <Chat messages={messages}></Chat>
+            </div>
+            <div className={styles.ControlsContainer}>
+                <SettingsButton disabled={disabled} onClick={handleSettingsOpen}/>
+                <Controls disabled={disabled} onSend={handleContentSend}></Controls>
+            </div>
+            <SettingsModal isOpen={isSettingsOpen} onClose={handleSettingsClose}/>
         </div>
-        <div className={styles.ControlsContainer}>
-            <SettingsButton disabled={disabled} onClick={handleSettingsOpen}/>
-            <Controls disabled={disabled} onSend={handleContentSend}></Controls>
-        </div>
-        <SettingsModal
-            isOpen={isSettingsOpen}
-            onClose={handleSettingsClose}
-        />
-    </div>);
+    );
 }
 
 export default App;
